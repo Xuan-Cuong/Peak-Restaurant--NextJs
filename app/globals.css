@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* CSS Variables defined from tailwind.config.js for potential non-Tailwind usage */
+  --color-primary: #C0A062;
+  --color-secondary: #2B3A42;
+  --color-background: #0F171B;
+  --color-surface: #1A242A;
+  --color-text: #E0E0E0;
+  --color-text-muted: #A0AEC0;
+  --color-text-heading: #FFFFFF;
+  --color-border: #3A4A52;
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Montserrat', serif;
+}
+
+body {
+  @apply bg-background text-text font-sans antialiased;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif font-bold text-text-heading tracking-tight;
+  /* Example Base Heading Styles */
+}
+
+h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+h2 { @apply text-3xl md:text-4xl; }
+h3 { @apply text-xl md:text-2xl; }
+
+p {
+  @apply mb-4 leading-relaxed;
+}
+
+a {
+  @apply text-primary transition-colors duration-300 hover:text-primary-dark;
+}
+
+/* --- Component Layer Examples --- */
+@layer components {
+  /* Button Base Styles */
+  .button {
+    @apply inline-block px-6 py-3 rounded-md text-center font-semibold tracking-wide transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background;
+    text-decoration: none !important; /* Override link styles */
+  }
+  .button-primary {
+    @apply bg-primary text-background hover:bg-primary-dark focus:ring-primary;
+  }
+  .button-secondary {
+    @apply bg-secondary text-text-heading hover:bg-opacity-80 focus:ring-secondary;
+  }
+  .button-outline {
+    @apply border border-primary text-primary hover:bg-primary hover:text-background focus:ring-primary;
+  }
+
+  /* Section Padding */
+  .content-section {
+    @apply py-16 md:py-24; /* ~py-section */
+  }
+
+  /* Section Header */
+  .section-header {
+    @apply text-center mb-12 md:mb-16 max-w-3xl mx-auto;
+  }
+  .section-header h2 {
+    @apply mb-4;
+  }
+  .section-header .lead {
+    @apply text-lg md:text-xl text-text-muted;
+  }
+
+  /* Visually Hidden Class (for accessibility) */
+  .visually-hidden {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+  }
+
+  /* Hamburger Icon Base */
+  .hamburger-icon {
+      @apply w-6 h-5 flex flex-col justify-between items-center cursor-pointer;
+  }
+  .hamburger-icon span {
+      @apply block w-full h-0.5 bg-white rounded transition-all duration-300 ease-in-out;
+  }
+
+  /* Hamburger Icon Active State (JS will add .active class) */
+  .hamburger-icon.active span:nth-child(1) {
+      @apply transform rotate-45 translate-y-[7px]; /* Adjust based on exact height/spacing */
+  }
+  .hamburger-icon.active span:nth-child(2) {
+      @apply opacity-0;
+  }
+  .hamburger-icon.active span:nth-child(3) {
+      @apply transform -rotate-45 translate-y-[-7px]; /* Adjust based on exact height/spacing */
+  }
+
+  /* Scroll Reveal Base State (used by ClientScrollReveal.js) */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
